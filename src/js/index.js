@@ -215,6 +215,7 @@ async function getArea(){
     const api = await fetch(`https://www.themealdb.com/api/json/v1/1/list.php?a=list`)
     const res = await api.json()
     displayArea(res.meals.slice(0, 20))
+    console.log(res.meals);
     $(".loading-screen .loader").fadeOut(300 , ()=>{
         home.classList.remove("hidden")
     })
@@ -233,11 +234,78 @@ async function getAreaMeals(x){
 function displayArea(x){
     data.innerHTML = ""
     let cartoone = ""
+    let area = ""
     for(let i=0 ; i < x.length ; i++){
+        switch (x[i].strArea) {
+            case "American":
+                area="us"
+                break;
+            case "British":
+                area="gb-eng"
+                break;
+            case "Canadian":
+                area="ca"
+                break;
+            case "Chinese":
+                area="cn"
+                break;
+            case "Croatian":
+                area="hr"
+                break;
+            case "Dutch":
+                area="nl"
+                break;
+            case "Egyptian":
+                area="eg"
+                break;
+            case "Filipino":
+                area="ph"
+                break;
+            case "French":
+                area="fr"
+                break;
+            case "Greek":
+                area="gr"
+                break;
+            case "Indian":
+                area="in"
+                break;
+            case "Irish":
+                area="ir"
+                break;
+            case "Italian":
+                area="it"
+                break;
+            case "Jamaican":
+                area="jm"
+                break;
+            case "Japanese":
+                area="jp"
+                break;
+            case "Kenyan":
+                area="ke"
+                break;
+            case "Malaysian":
+                area="my"
+                break;
+            case "Mexican":
+                area="mx"
+                break;
+            case "Moroccan":
+                area="ma"
+                break;
+            case "Polish":
+                area="pl"
+                break;
+                
+            default:
+                break;
+        }
         cartoone += `
         <div class="w-full md:w-1/2 lg:w-1/3 p-3 rounded-lg group ">
                                         <div class="inner rounded-lg  cursor-pointer flex flex-wrap flex-col justify-center items-center" onclick="getAreaMeals('${x[i].strArea}')">
-                                                <i class="fa-solid fa-house-laptop fa-4x dark:text-white text-red-500"></i>
+                                                <img src="https://flagcdn.com/64x48/${area}.png" />
+                                                
                                                 <h3 class="text-xl md:text-lg lg:text-base font-medium dark:text-white text-red-600">${x[i].strArea}</h3>
                                             </div>
                                         </div>
